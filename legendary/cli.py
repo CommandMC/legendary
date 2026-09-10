@@ -3129,6 +3129,10 @@ def main():
         for key, value in global_args.__dict__.items():
             setattr(args, key, value)
 
+    # Don't pass along the literal "--" if it is added to signal the end of Legendary's arguments
+    if extra and extra[0] == '--':
+        extra.pop(0)
+
     if args.version:
         print(f'legendary version "{__version__}", codename "{__codename__}"')
         exit(0)
